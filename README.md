@@ -8,4 +8,6 @@ BYOL - Bring your own License
 
 ## Scenario 2
 
-Customer Support  
+Customer Support 
+
+Customer identifier and contact information will be passed to the VM and then sent to the partner
