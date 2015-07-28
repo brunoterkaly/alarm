@@ -20,12 +20,6 @@
                 "description": "Password for the Virtual Machine."
             }
         },
-        "licenseKey": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Password for the Virtual Machine."
-            }
-        },
         "dnsNameForPublicIP": {
             "type": "string",
             "metadata": {
@@ -180,24 +174,6 @@
                     ]
                 }
             }
-        }, {
-        "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(variables('vmName'),'/newuserscript')]",
-        "apiVersion": "2015-05-01-preview",
-        "location": "[parameters('location')]",
-        "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
-        ],
-        "properties": {
-            "publisher": "Microsoft.OSTCExtensions",
-            "type": "CustomScriptForLinux",
-            "typeHandlerVersion": "1.2",
-            "settings": {
-                "fileUris": [
-                    "https://raw.githubusercontent.com/brunoterkaly/alarm/master/install_license.sh"
-                ],
-                "commandToExecute": "[concat('sh install_license.sh ', parameters('licenseKey'))]"
-            }
         }
-    }]
+    ]
 }
