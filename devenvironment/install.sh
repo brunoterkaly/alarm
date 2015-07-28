@@ -8,6 +8,8 @@ customer=$1
 
 echo $customer >> /tmp/log.txt
 
-sudo apt-get install --yes nodejs
+sudo apt-get install --yes nodejs-legacy
 sudo apt-get install --yes npm
 sudo npm install -g azure-cli
+
+# install git
