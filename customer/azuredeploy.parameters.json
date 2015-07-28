@@ -9,16 +9,16 @@
         "value": "MyP@ssw0rd"
     },
     "customerName": {
-        "value": "JZ Enterprises"
+        "value": "JZEnterprises"
     },
     "contactName": {
-        "value": "Jim Zim"
+        "value": "JimZim"
     },
     "contactEmail": {
         "value": "jimzim@jimzimmerman.com"
     },
     "customerAzureSubscriptionId": {
-        "value": "Azure Subscription ID"
+        "value": "de0622a4-2e62-46b7-b5ff-e0f7ede2289b"
     },
     "dnsNameForPublicIP": {
         "value": "alarmcustomer1"
