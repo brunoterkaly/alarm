@@ -1,0 +1,20 @@
+{
+    "newStorageAccountName": {
+        "value": "azure-cli-dev"
+    },
+    "adminUsername": {
+        "value": "azureuser"
+    },
+    "adminPassword": {
+        "value": "MyP@ssw0rd"
+    },
+    "customer": {
+        "value": "JimZim"
+    },
+    "dnsNameForPublicIP": {
+        "value": "mpazuredev"
+    },
+    "ubuntuOSVersion": {
+        "value": "14.04.2-LTS"
+    }
+}
