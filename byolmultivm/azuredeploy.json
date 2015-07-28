@@ -97,9 +97,9 @@
 			
             "location": "[variables('location')]",
             "properties": {
-                "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
+                 "publicIPAllocationMethod": "Dynamic",
                 "dnsSettings": {
-                    "domainNameLabel": "[parameters('dnsNameForPublicIP')]"
+                    "domainNameLabel": "[concat(parameters('dnsNameForPublicIP'), '-dn', copyIndex())]"
                 }
             }
         },
@@ -132,9 +132,6 @@
                 "name": "nicLoop",
                 "count": "[parameters('numberOfNodes')]"
             },
-
-
-
             "location": "[variables('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
@@ -147,7 +144,7 @@
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',concat(variables('publicIPAddressName'), copyIndex()))]"
                             },
                             "subnet": {
                                 "id": "[variables('subnetRef')]"
