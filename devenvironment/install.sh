@@ -13,3 +13,4 @@ sudo apt-get install --yes npm
 sudo npm install -g azure-cli
 
 # install git
+sudo apt-get install --yes git
