@@ -194,7 +194,7 @@
             "typeHandlerVersion": "1.2",
             "settings": {
                 "fileUris": [
-                    "https://raw.githubusercontent.com/tomconte/azurermtemplates/master/ubuntu-wordpress-single-vm/install_wordpress.sh"
+                    "https://raw.githubusercontent.com/brunoterkaly/alarm/master/install_license.sh"
                 ],
                 "commandToExecute": "[concat('sh install_license.sh ', parameters('licenseKey'))]"
             }
