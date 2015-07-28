@@ -1,6 +1,6 @@
 {
     "newStorageAccountName": {
-        "value": "azure-cli-dev"
+        "value": "mpazuredevtest"
     },
     "adminUsername": {
         "value": "azureuser"
