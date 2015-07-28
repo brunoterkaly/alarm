@@ -6,4 +6,4 @@ logger "Installing License"
 
 licenseKey=$1
 
-echo $licenseKey
+echo $licenseKey >> /tmp/licensefile.txt
