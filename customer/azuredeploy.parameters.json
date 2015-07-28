@@ -1,6 +1,6 @@
 {
     "newStorageAccountName": {
-        "value": "alarmcustomer"
+        "value": "alarmcustomer1"
     },
     "adminUsername": {
         "value": "azureuser"
@@ -21,7 +21,7 @@
         "value": "Azure Subscription ID"
     },
     "dnsNameForPublicIP": {
-        "value": "alarmcustomer"
+        "value": "alarmcustomer1"
     },
     "ubuntuOSVersion": {
         "value": "14.04.2-LTS"

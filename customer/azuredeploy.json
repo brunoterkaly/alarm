@@ -215,7 +215,7 @@
                 "fileUris": [
                     "https://raw.githubusercontent.com/brunoterkaly/alarm/master/customer/install.sh"
                 ],
-                "commandToExecute": "[concat('sh install.sh ', parameters('customer'))]"
+                "commandToExecute": "[concat('sh install.sh ', parameters('customerName'), ' ', parameters('contactName'), ' ', parameters('contactEmail'), ' ', parameters('customerAzureSubscriptionId')  )]"
             }
         }
     }]
