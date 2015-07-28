@@ -184,7 +184,7 @@
                    "osDisk" : {
                         "name": "osdisk",
                         "vhd": {
-                            "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+                            "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),copyindex(),'.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -201,11 +201,13 @@
         },
         {
         "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(variables('vmName'),'/newuserscript')]",
+        "name": "[concat(variables('vmName'),copyindex(), '/newuserscript')]",
+		
         "apiVersion": "2015-05-01-preview",
         "location": "[variables('location')]",
         "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), copyindex())]",
+            "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), copyindex())]"
         ],
         "properties": {
             "publisher": "Microsoft.OSTCExtensions",
