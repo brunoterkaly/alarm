@@ -4,12 +4,13 @@
 
 logger "Installing Azure Dev Environment"
 
-customer=$1
+customerName=$1
+contactName=$2
+contactEmail=$3
+customerAzureSubscriptionId=$4
 
-echo $customer >> /tmp/log.txt
 
-sudo apt-get install --yes nodejs-legacy
-sudo apt-get install --yes npm
-sudo npm install -g azure-cli
-
-# install git
+echo $customerName >> /tmp/log.txt
+echo $contactName >> /tmp/log.txt
+echo $contactEmail >> /tmp/log.txt
+echo $customerAzureSubscriptionId >> /tmp/log.txt

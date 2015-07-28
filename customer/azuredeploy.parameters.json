@@ -1,6 +1,6 @@
 {
     "newStorageAccountName": {
-        "value": "mpazuredevtest"
+        "value": "alarmcustomer"
     },
     "adminUsername": {
         "value": "azureuser"
@@ -8,11 +8,20 @@
     "adminPassword": {
         "value": "MyP@ssw0rd"
     },
-    "customer": {
-        "value": "JimZim"
+    "customerName": {
+        "value": "JZ Enterprises"
+    },
+    "contactName": {
+        "value": "Jim Zim"
+    },
+    "contactEmail": {
+        "value": "jimzim@jimzimmerman.com"
+    },
+    "customerAzureSubscriptionId": {
+        "value": "Azure Subscription ID"
     },
     "dnsNameForPublicIP": {
-        "value": "mpazuredev"
+        "value": "alarmcustomer"
     },
     "ubuntuOSVersion": {
         "value": "14.04.2-LTS"
