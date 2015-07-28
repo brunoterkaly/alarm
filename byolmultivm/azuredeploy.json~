@@ -201,7 +201,12 @@
         },
         {
         "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(variables('vmName'), '/newuserscript')]",
+        "name": "[concat(variables('vmName'), copyIndex(), '/newuserscript')]",
+        "copy": {
+             "name": "virtualMachineLoop",
+              "count": "[parameters('numberOfNodes')]"
+        },
+
         "apiVersion": "2015-05-01-preview",
         "location": "[variables('location')]",
         "dependsOn": [
