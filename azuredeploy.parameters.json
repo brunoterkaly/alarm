@@ -14,19 +14,6 @@
     "dnsNameForPublicIP": {
         "value": "jzarmtest"
     },
-    "location": {
-            "type": "string",
-            "allowedValues": [
-                "West US",
-                "East US",
-                "West Europe",
-                "East Asia",
-                "Southeast Asia"
-            ],
-            "metadata": {
-                "description": "Location for the resources"
-            }
-        },
     "ubuntuOSVersion": {
         "value": "14.04.2-LTS"
     }
