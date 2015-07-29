@@ -66,7 +66,14 @@
             "metadata": {
                 "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version. Allowed values: 12.04.2-LTS, 12.04.3-LTS, 12.04.4-LTS, 12.04.5-LTS, 12.10, 14.04.2-LTS, 14.10, 15.04."
             }
-        }
+        },
+  		"numberOfNodes": {
+  			"type": "int",
+  			"metadata" : {
+  			    "description": "Number of nodes"
+  			},
+  			"defaultValue": "3"
+  		}
     },
     "variables": {
         "location": "West US",
@@ -100,12 +107,17 @@
         {
             "apiVersion": "2015-05-01-preview",
             "type": "Microsoft.Network/publicIPAddresses",
-            "name": "[variables('publicIPAddressName')]",
+            "name": "[concat(variables('publicIPAddressName'), copyIndex())]",
+            "copy": {
+                "name": "PublicIPLoop",
+                "count": "[parameters('numberOfNodes')]"
+            },
+
             "location": "[variables('location')]",
             "properties": {
-                "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
+                 "publicIPAllocationMethod": "Dynamic",
                 "dnsSettings": {
-                    "domainNameLabel": "[parameters('dnsNameForPublicIP')]"
+                    "domainNameLabel": "[concat(parameters('dnsNameForPublicIP'), '-dn', copyIndex())]"
                 }
             }
         },
@@ -133,10 +145,14 @@
         {
             "apiVersion": "2015-05-01-preview",
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[variables('nicName')]",
+            "name": "[concat(variables('nicName'), copyindex())]",
+            "copy": {
+                "name": "nicLoop",
+                "count": "[parameters('numberOfNodes')]"
+            },
             "location": "[variables('location')]",
             "dependsOn": [
-                "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
+                "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'), copyIndex())]",
                 "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
             ],
             "properties": {
@@ -146,7 +162,7 @@
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+                                 "id": "[resourceId('Microsoft.Network/publicIPAddresses',concat(variables('publicIPAddressName'), copyIndex()))]"
                             },
                             "subnet": {
                                 "id": "[variables('subnetRef')]"
@@ -159,18 +175,22 @@
         {
             "apiVersion": "2015-05-01-preview",
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[variables('vmName')]",
+            "name": "[concat(variables('vmName'), copyindex())]",
+            "copy": {
+                "name": "virtualMachineLoop",
+                "count": "[parameters('numberOfNodes')]"
+            },
             "location": "[variables('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName'))]",
-                "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+                "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), copyindex())]"
             ],
             "properties": {
                 "hardwareProfile": {
                     "vmSize": "[variables('vmSize')]"
                 },
                 "osProfile": {
-                    "computername": "[variables('vmName')]",
+                    "computername": "[concat(variables('vmName'), copyindex())]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]"
                 },
@@ -184,7 +204,7 @@
                    "osDisk" : {
                         "name": "osdisk",
                         "vhd": {
-                            "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+                            "uri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),copyindex(),'.vhd')]"
                         },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
@@ -193,7 +213,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('nicName'),copyindex()))]"
                         }
                     ]
                 }
@@ -201,11 +221,15 @@
         },
         {
         "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(variables('vmName'),'/newuserscript')]",
+        "name": "[concat(variables('vmName'), copyIndex(), '/newuserscript')]",
+        "copy": {
+             "name": "virtualMachineLoop",
+              "count": "[parameters('numberOfNodes')]"
+        },
         "apiVersion": "2015-05-01-preview",
         "location": "[variables('location')]",
         "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), copyindex())]"
         ],
         "properties": {
             "publisher": "Microsoft.OSTCExtensions",
@@ -213,7 +237,7 @@
             "typeHandlerVersion": "1.2",
             "settings": {
                 "fileUris": [
-                    "https://raw.githubusercontent.com/brunoterkaly/alarm/master/customerdata-singlevm/install.sh"
+                    "https://raw.githubusercontent.com/brunoterkaly/alarm/master/customer-multivm/install.sh"
                 ],
                 "commandToExecute": "[concat('sh install.sh ', parameters('customerName'), ' ', parameters('contactName'), ' ', parameters('contactEmail'), ' ', parameters('customerAzureSubscriptionId')  )]"
             }

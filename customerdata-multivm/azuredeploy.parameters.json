@@ -1,0 +1,29 @@
+{
+    "newStorageAccountName": {
+        "value": "alarmcustomer1"
+    },
+    "adminUsername": {
+        "value": "azureuser"
+    },
+    "adminPassword": {
+        "value": "MyP@ssw0rd"
+    },
+    "customerName": {
+        "value": "JZEnterprises"
+    },
+    "contactName": {
+        "value": "JimZim"
+    },
+    "contactEmail": {
+        "value": "jimzim@jimzimmerman.com"
+    },
+    "customerAzureSubscriptionId": {
+        "value": "de0622a4-2e62-46b7-b5ff-e0f7ede2289b"
+    },
+    "dnsNameForPublicIP": {
+        "value": "alarmcustomer1"
+    },
+    "ubuntuOSVersion": {
+        "value": "14.04.2-LTS"
+    }
+}
