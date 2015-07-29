@@ -25,5 +25,8 @@
     },
     "ubuntuOSVersion": {
         "value": "14.04.2-LTS"
+    },
+	  "numberOfNodes":{
+		    "value": 3
     }
 }
