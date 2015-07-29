@@ -92,7 +92,8 @@
         "vmSize": "Standard_D1",
         "virtualNetworkName": "MyVNET",
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
-        "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
+        "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+        "shellScriptUrl":  "https://raw.githubusercontent.com/brunoterkaly/alarm/master/customerdata-multivm/install.sh"
     },
     "resources": [
         {
@@ -237,7 +238,7 @@
             "typeHandlerVersion": "1.2",
             "settings": {
                 "fileUris": [
-                    "https://raw.githubusercontent.com/brunoterkaly/alarm/master/customer-multivm/install.sh"
+                    "variables('shellScriptUrl')"
                 ],
                 "commandToExecute": "[concat('sh install.sh ', parameters('customerName'), ' ', parameters('contactName'), ' ', parameters('contactEmail'), ' ', parameters('customerAzureSubscriptionId')  )]"
             }
