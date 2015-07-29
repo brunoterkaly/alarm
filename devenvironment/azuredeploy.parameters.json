@@ -1,6 +1,6 @@
 {
     "newStorageAccountName": {
-        "value": "mpazuredevtest"
+        "value": "mpazuredevtestpowershell"
     },
     "adminUsername": {
         "value": "azureuser"
@@ -12,7 +12,7 @@
         "value": "JimZim"
     },
     "dnsNameForPublicIP": {
-        "value": "mpazuredev"
+        "value": "mpazuredevpowershell"
     },
     "ubuntuOSVersion": {
         "value": "14.04.2-LTS"

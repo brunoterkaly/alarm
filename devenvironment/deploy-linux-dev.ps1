@@ -4,7 +4,7 @@ Param(
   [string] $ResourceGroupName = 'linux-azure-cli',
   [string] $ResourceGroupLocation = "West US",
   [string] $TemplateFile = '.\azuredeploy.json',
-  [string] $ParametersFile = '.\azuredeploy-parameters.json',
+  [string] $ParametersFile = '.\azuredeploy.parameters.json'
 )
 
 Set-StrictMode -Version 3
