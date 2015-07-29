@@ -1,0 +1,20 @@
+{
+    "newStorageAccountName": {
+        "value": "jzarmtest"
+    },
+    "adminUsername": {
+        "value": "jzarmtest"
+    },
+    "adminPassword": {
+        "value": "jzArmtest@1"
+    },
+    "licenseKey": {
+        "value": "1"
+    },
+    "dnsNameForPublicIP": {
+        "value": "jzarmtest"
+    },
+    "ubuntuOSVersion": {
+        "value": "14.04.2-LTS"
+    }
+}
