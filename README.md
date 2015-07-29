@@ -66,13 +66,11 @@ Once you have provisioned this virtual machine, you will need to gather its conn
 
 ![](images/snap002.png)
 
-#### SSH into the VM (Putty for Windows Users)
+#### SSH into the VM 
 
 Skip this step if you already are logged into a Linux VM.
 
-From there you will need to remotely connect into that Linux virtual machine. MacOS has built them as SSH capabilities. Windows requires you to install the Putty application. MacOS users simply **ssh** from a console window.
-
-![](images/snap003.png)
+From there you will need to remotely connect into that Linux virtual machine. MacOS has built them as SSH capabilities. Windows requires you to install the Putty application. 
 
 
 
@@ -254,6 +252,24 @@ Key points when modifying:
 _azuredeploy.parameters.json_
 
 
+#### install_license.sh
+
+This vast found these to be at the end of an http endpoint. This is an obvious security concern and it is recommended that this script be placed behind a company firewall.
+
+```bash
+#!/bin/sh
+# Custom BYOL install script for Ubuntu 14.02
+# $1 = licenseKey
+
+logger "Installing License"
+
+licenseKey=$1
+
+echo $licenseKey >> /tmp/licensefile.txt
+
+````
+
+
 ## The customer provisioning process. Executing the deployment. 
 
 Once the modifications are made to azuredeploy.json and azuredeploy.parameters.json files have been made, the customer is ready to provision their VMs, networks, storage, and more.
@@ -298,6 +314,27 @@ If you go to http://portal.azure.com, you can see your deployment:
 ## Validating successful deployment
 
 Once you have kicked off the deployment, it may take a few moments for the deployment to successfully complete. This next section is designed for the customer wanting to validate successful deployment.
+
+Start by navigating to the portal (http://portal.azure.com)
+
+![](images/snap023.png)
+
+From the portal, select, browse, resource groups, MyResourceGroup.
+
+![](images/snap024.png)
+
+You'll notice that we have provisioned a three node cluster, complete with 3 VMs, 3 nic cards, and 3 public IP addresses.
+
+![](images/portal1.png)
+
+Now we need to drill down into the virtual machine to get its public IP from the portal so that we can remote in and validate that the license file has been successfully been installed the /tmp directory.
+
+![](images/snap025.png)
+
+The image below proves the deployment was a success because you can see the license file in the /tmp folder. This file will appear in the in each and every VM that got deployed.
+
+![](images/snap027.png)
+
 
 ## Video walk-through of the process
 
