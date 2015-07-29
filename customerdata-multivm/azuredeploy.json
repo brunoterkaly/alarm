@@ -238,7 +238,7 @@
             "typeHandlerVersion": "1.2",
             "settings": {
                 "fileUris": [
-                    "variables('shellScriptUrl')"
+                    "https://raw.githubusercontent.com/brunoterkaly/alarm/master/customerdata-multivm/install.sh"
                 ],
                 "commandToExecute": "[concat('sh install.sh ', parameters('customerName'), ' ', parameters('contactName'), ' ', parameters('contactEmail'), ' ', parameters('customerAzureSubscriptionId')  )]"
             }
