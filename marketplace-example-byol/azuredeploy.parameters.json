@@ -1,6 +1,6 @@
 {
     "newStorageAccountName": {
-        "value": "marketplace-example"
+        "value": "marketplaceexample"
     },
     "adminUsername": {
         "value": "azureuser"
@@ -12,6 +12,6 @@
         "value": "1"
     },
     "dnsNameForPublicIP": {
-        "value": "marketplace-example"
+        "value": "marketplaceexample"
     }
 }
