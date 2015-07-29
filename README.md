@@ -15,6 +15,19 @@ Easier for parnters to onboard to the marketplace.
 
 ![](images/buylicense.png)
 
+
+## High level steps
+
+This document will go over some detail steps in deploying license files to Linux VMs. 
+
+- It begins by getting access to a Linux computer that will be used to execute the provisioning process. 
+- The provisioning process will begin by installing the Azure cross platform client tools on the Linux computer.
+-  Next, the necessary installation scripts and provisioning artifacts will be downloaded from Github using the git clone command. 
+	-  Some modifications will need to be made from this downloaded content. Both the partner as well as the customers and the partner will need to make these modifications. The partner defines the way the license file gets copied to the provisioned Linux VM. 
+-  But it is the end customer that runs the provisioning process. It will the customer that places the license key, and defines the attributes of the provisioned infrastructure, physically kick off the provisioning process.
+
+![](images/snap022.png)
+
 ## How this content can help
 
 The purpose of this content is to enable your customers to quickly and easily place the license keys in virtual machines that they provision.
@@ -23,6 +36,7 @@ The purpose of this content is to enable your customers to quickly and easily pl
 - This document will help you simplify replacements of life in school on provisioned virtual machines
 - Your customers will:
 	- Need to begin by provisioning a Linux virtual machine through the portal
+        - If the don't already have a Linux computer
 	- Install the Azure cross platform tooling on the Linux VM
 	- Will clone this repository to the Linux VM
 	- Make necessary changes to azuredeploy.json to include customer information as well as license key information
@@ -30,7 +44,7 @@ The purpose of this content is to enable your customers to quickly and easily pl
 
 ## Getting Setup
 
-If you don't already have one, one of the first things you'll need to do is provision a Linux VM:
+If you don't already have one, one of the first things you'll need to do is provision a Linux computer:
 - This Linux VM will be used to provision a cluster
 - We will install the Azure cross platform tooling on it
 - We will also clone this repository to it
@@ -44,6 +58,8 @@ If you already have a Linux VM, skip to the **Installing the cross-platform tool
 
 #### Getting the connection information of the VM
 
+This applies to those who don't have a Linux computer to run the provisioning process.
+
 Once you have provisioned this virtual machine, you will need to gather its connection information:
 - The IP address
 - The port number
@@ -52,16 +68,18 @@ Once you have provisioned this virtual machine, you will need to gather its conn
 
 #### SSH into the VM (Putty for Windows Users)
 
-From there you will need to remotely connect into that virtual machine. MacOS has built them as SSH capabilities. Windows requires you to install the Putty application. MacOS users simply **ssh** from a console window.
+Skip this step if you already are logged into a Linux VM.
+
+From there you will need to remotely connect into that Linux virtual machine. MacOS has built them as SSH capabilities. Windows requires you to install the Putty application. MacOS users simply **ssh** from a console window.
 
 ![](images/snap003.png)
 
 
 
 
-#### Installing the cross-platform tooling
+## Installing the cross-platform tooling
 
-Your next goal is to install the Azure cross-platform tooling. For Ubuntu images. This is simply a matter of issuing the following commands:
+Your next goal is to install the Azure cross-platform tooling. For Ubuntu images. This is simply a matter of issuing the following commands. Note that there are different commands, depending on whether you have Ubuntu or RPM-based Linux distributions.
 
 **Ubuntu**
 ```
@@ -70,7 +88,7 @@ sudo apt-get install nodejs-legacy
 sudo apt-get install npm
 sudo npm install -g azure-cli
 ``` 
-**RPM Based (CentOS)
+**RPM Based (CentOS)**
 ```
 su – 
 yum update [enter] 
@@ -91,27 +109,32 @@ If tooling was successful, you will just need to type in the following command
 ````
 azure --help
 ````
-
+You should see a number of commands that are available to the Azure cross platform tooling.
 
 
 ![](images/snap006.png)
 
 ## Understanding how to install licensing keys on all provisioned VMs
 
-The following steps will get your started:
+Now that we have a Linux computer from which we can execute the provisioning process, let's take a deeper look at how all the pieces fit together.
 
-- Remote into the Ubuntu Image that we previously created
-	- Login as superuser (sudo -s)
-- Clone the repo
-	- git clone https://github.com/brunoterkaly/alarm.git
-- cd alarm/byol-singlevm
-	- Review the following files
-		- azuredeploy.json  
-		- azuredeploy.parameters.json  
-		- deploy.bat  
-		- install_license.sh
 
-#### Make the necessary changes
+The following steps will get your started. 
+
+
+1. Remote into the Ubuntu Image that we previously created
+	1. Login as superuser (sudo -s)
+1. Run the git clone command to get all the provisioning artifacts on your local Linux computer ( for the Linux VM you provisioned in Azure )
+    1. git clone https://github.com/brunoterkaly/alarm.git
+1. Change directory to alarm/byol-singlevm.
+    1. Review the following files. It is these files that we will modify. Remember that both the partner as well as the customer will make these modifications.
+		1. azuredeploy.json  
+		1. azuredeploy.parameters.json  
+		1. deploy.bat  
+		1. install_license.sh
+
+
+#### Some key points to note about the modifications you will make as a partner and a customer
 
 There are a few things to keep in mind when installing license keys. The license key is found in **azuredeploy.parameters.json.** You can have customers put this in there themselves. The partner will need to provide the appropriate **install_license.sh** script at the http endpoint inside of **azuredeploy.json**.
 
@@ -130,8 +153,7 @@ Both the partner and the customer will play a role here.
 - Customer
 	- Modify the variables section to indicate such things as VM name, VM size, and other attributes relating to naming, networking, storage, and more.
 
-
- modify the VMExtensions area as needed. You fill need to modify the **fileUris** section to point to the correct **install_license.sh** install script. The VM Extensions are a key component to be able to run BASH scripts after the VM is provisioned.
+The **partner** will need to modify the VMExtensions area as needed. You fill need to modify the **fileUris** section to point to the correct **install_license.sh** install script. The VM Extensions are a key component to be able to run BASH scripts after the VM is provisioned. The partner will modify the install_license.sh script as needed for their business.
 
 ```json
 {
@@ -159,6 +181,7 @@ Both the partner and the customer will play a role here.
         }
     }
 ```
+_azuredeploy.json_
 
 You can also modify the **variables** section to reflect vm name, vm size, and other attributes relating to naming, networking, storage, and more.
 
@@ -184,27 +207,102 @@ You can also modify the **variables** section to reflect vm name, vm size, and o
     },
 
 ```
+_azuredeploy.json_
+
+#### Modifying azuredeploy.parameters.json
+
+Key points when modifying:
+
+- The customer will modify this file
+- Important information is here
+- Customers will input the license key they obtain from the partner
+- Customers will want to modify login credentials, and potentially other parameters:
+	- newStorageAccountName 
+	- adminUsername 
+	- adminPassword 
+	- licenseKey 
+	- dnsNameForPublicIP 
+	- ubuntuOSVersion 
+	- numberOfNodes
+
+```json
+{
+    "newStorageAccountName": {
+        "value": "btstorageacct"
+    },
+    "adminUsername": {
+        "value": "btarmtest"
+    },
+    "adminPassword": {
+        "value": "btArmtest@1"
+    },
+    "licenseKey": {
+        "value": "1"
+    },
+    "dnsNameForPublicIP": {
+        "value": "btarmtest"
+    },
+    "ubuntuOSVersion": {
+        "value": "14.04.2-LTS"
+    },
+	"numberOfNodes":{
+		"value": 3
+	}
+}
+
+```
+_azuredeploy.parameters.json_
 
 
-**azuredeploy.json**
+## The customer provisioning process. Executing the deployment. 
 
-You modify the VMExtensions area as needed. You fill need to modify the 
+Once the modifications are made to azuredeploy.json and azuredeploy.parameters.json files have been made, the customer is ready to provision their VMs, networks, storage, and more.
 
+- The Azure Cross-Platform tooling is needed
+- Both partner and customer have updated azuredeploy.json and azuredeploy.parameters.json.
 
-We will use ARM templates and BASH script to install license keys on all provisioned VMs.
+The diagram below illustrates the command line. For more context, see https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-deploy-rmtemplates-azure-cli/.
 
-We will need to 
+The diagram below illustrates:
 
+- Executing the XPlat CLI command:
+
+```
+$ azure group create “myRGroup" "West US" -f azuredeploy.json -d “myDeploy" -e azuredeploy.parameters.json
+```
 
 ![](images/snap012.png)
+
+Notice the **azure group create** command. The assumption made here is the customer has made the necessary modifications to azuredeploy.json and azuredeploy.parameters.json. In addition, the partner has made changes to azuredeploy.json and install_license.sh.
+
  
+The **azure group create...** command works as follows:
 
-## Getting Setup
+- It takes the parameters file and the template file and generates a deployment.
+- azuredeploy.parameters.json
+	- Parameters file 
+- azuredeploy.json
+	- Template file 
 
 
-## Getting Setup
+![](images/paramandtemplate.png)
+
+If you go to http://portal.azure.com, you can see your deployment:
+- Note that this is the **byol-multivm** version
+- This repo also provides **byol-singlevm** version
 
 
-## Getting Setup
+![](images/portal1.png)
+
+
+## Validating successful deployment
+
+Once you have kicked off the deployment, it may take a few moments for the deployment to successfully complete. This next section is designed for the customer wanting to validate successful deployment.
+
+## Video walk-through of the process
+
+The following brief video takes you through some of the considerations outlined above.
+
+## Additional resources
 
 
