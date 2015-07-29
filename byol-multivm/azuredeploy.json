@@ -52,7 +52,7 @@
 		"numberOfNodes": {
 			"type": "int",
 			"metadata" : {
-			    "description": "Number of nodes"	
+			    "description": "Number of nodes"
 			},
 			"defaultValue": "3"
 		}
@@ -89,12 +89,12 @@
         {
             "apiVersion": "2015-05-01-preview",
             "type": "Microsoft.Network/publicIPAddresses",
-            "name": "[concat(variables('publicIPAddressName'), copyIndex())]", 
+            "name": "[concat(variables('publicIPAddressName'), copyIndex())]",
             "copy": {
                 "name": "PublicIPLoop",
                 "count": "[parameters('numberOfNodes')]"
             },
-			
+
             "location": "[variables('location')]",
             "properties": {
                  "publicIPAllocationMethod": "Dynamic",
@@ -219,7 +219,7 @@
             "typeHandlerVersion": "1.2",
             "settings": {
                 "fileUris": [
-                    "https://raw.githubusercontent.com/brunoterkaly/alarm/master/byolmultivm/install_license.sh"
+                    "https://raw.githubusercontent.com/brunoterkaly/alarm/master/byol-multivm/install_license.sh"
                 ],
                 "commandToExecute": "[concat('sh install_license.sh ', parameters('licenseKey'))]"
             }
