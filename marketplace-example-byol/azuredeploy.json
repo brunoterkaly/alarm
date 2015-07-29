@@ -31,29 +31,13 @@
             "metadata": {
                   "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
             }
-        },
-        "ubuntuOSVersion": {
-            "type": "string",
-            "defaultValue": "14.10",
-            "allowedValues": [
-                "12.04.2-LTS",
-                "12.04.3-LTS",
-                "12.04.4-LTS",
-                "12.04.5-LTS",
-                "12.10",
-                "14.04.2-LTS",
-                "14.10",
-                "15.04"
-            ],
-            "metadata": {
-                "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version. Allowed values: 12.04.2-LTS, 12.04.3-LTS, 12.04.4-LTS, 12.04.5-LTS, 12.10, 14.04.2-LTS, 14.10, 15.04."
-            }
         }
     },
     "variables": {
         "location": "West US",
         "imagePublisher": "docker",
         "imageOffer": "docker-subscription-for-azure",
+        "sku": "dse-subem1y-000001",
         "OSDiskName": "osdiskforlinuxsimple",
         "nicName": "myVMNic",
         "addressPrefix": "10.0.0.0/16",
@@ -160,7 +144,7 @@
                     "imageReference": {
                         "publisher": "[variables('imagePublisher')]",
                         "offer": "[variables('imageOffer')]",
-                        "sku" : "[parameters('ubuntuOSVersion')]",
+                        "sku" : "[variables('sku')]",
                         "version":"latest"
                     },
                    "osDisk" : {
