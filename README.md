@@ -342,6 +342,17 @@ The image below proves the deployment was a success because you can see the lice
 
 The following brief video takes you through some of the considerations outlined above.
 
+[https://www.dropbox.com/s/ew81efqx6mxllge/alarm-video.mp4?dl=0](https://www.dropbox.com/s/ew81efqx6mxllge/alarm-video.mp4?dl=0 "Play Video")
+
+
 ## Additional resources
 
 
+-	https://azure.microsoft.com/en-us/documentation/articles/xplat-cli/
+-	https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/
+-	https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-azure-resource-manager/
+-	https://github.com/Azure/azure-linux-extensions
+-	https://github.com/brunoterkaly/alarm
+-	https://azure.microsoft.com/en-us/documentation/articles/powershell-azure-resource-manager/
+-	http://azure.microsoft.com/blog/2014/10/13/accessing-and-using-azure-vm-unique-id/
+-	https://azure.microsoft.com/en-us/documentation/articles/resource-groups-vm-searching/
