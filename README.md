@@ -2,7 +2,7 @@
 
 The purpose of alarm is to help our partner’s customers be more efficient by giving them easier ways to deploy a solution in the Azure Marketplace.
 
-- We have multiple template expamples that solve the following problems
+- We have multiple template examples that solve the following problems
  	- Provision VM's with Partner license keys automatically
 	- Customer Support registration when deploying marketplace solutions that have a CPU Hourly billing model
 
