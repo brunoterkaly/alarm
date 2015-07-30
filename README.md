@@ -284,6 +284,8 @@ The diagram below illustrates:
 - Executing the XPlat CLI command:
 
 ```
+$ azure login
+$ azure config mode arm
 $ azure group create “myRGroup" "West US" -f azuredeploy.json -d “myDeploy" -e azuredeploy.parameters.json
 ```
 
@@ -331,7 +333,7 @@ Now we need to drill down into the virtual machine to get its public IP from the
 
 ![](images/snap025.png)
 
-The image below proves the deployment was a success because you can see the license file in the /tmp folder. This file will appear in the in each and every VM that got deployed.
+The image below proves the deployment was a success because you can see the license file in the /tmp folder. This file will appear in the in each and every VM that got deployed.can video time
 
 ![](images/snap027.png)
 
