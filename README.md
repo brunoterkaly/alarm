@@ -5,6 +5,7 @@ The purpose of alarm is to help our partner’s customers be more efficient by g
 - We have multiple template examples that solve the following problems
  	- Provision VM's with Partner license keys automatically
 	- Customer Support registration when deploying marketplace solutions that have a CPU Hourly billing model
+		- Customer will put in their Azure subscription id and contact info which will get passed to the VM and then sent to the partner
 
 - Currently, it is not easy to deploy some of these solutions in the marketplace
 - The expectation is that the customer will remote into the VM and install the license key(s) that they purchased
