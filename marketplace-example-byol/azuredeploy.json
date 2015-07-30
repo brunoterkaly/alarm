@@ -127,7 +127,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "name": "[variables('vmName')]",
             "plan" : {
-               "name" : "byol",
+               "name" : "[variables('sku')]",
                "publisher" : "docker",
                "product": "docker-subscription-for-azure"
             },
