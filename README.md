@@ -1,29 +1,27 @@
-# ALARM (Azure Linux Resource Manager)
+# ALARM (Azure Linux ARM Templates)
 
-The purpose of alarm is to enable ISVs to better enable license key management on customer virtual machines.
+The purpose of alarm is to help our partner’s customers be more efficient by giving them easier ways to deploy a solution in the Azure Marketplace.
 
-Easier for parnters to onboard to the marketplace.
+- We have multiple template expamples that solve the following problems
+ 	- Provision VM's with Partner license keys automatically
+	- Customer Support registration when deploying marketplace solutions that have a CPU Hourly billing model
 
-- There are partners in the Azure Marketplace that have two models for monetization
-	- The first is a BYOL model 
-    - The second is a paid customer support model for their open source products. 
-- Currently, it is not easy to deploy some of these solutions in the marketplace 
+- Currently, it is not easy to deploy some of these solutions in the marketplace
 - The expectation is that the customer will remote into the VM and install the license key(s) that they purchased
 - Another issue is customer discovery
 - There is no mechanism that tells the partner which customers have provisioned software from the partner and which license keys are being used
-- There is also no mechanism to determine per hour CPU usage
 
 ![](images/buylicense.png)
 
 
 ## High level steps
 
-This document will go over some detail steps in deploying license files to Linux VMs. 
+This document will go over some detail steps in deploying license files to Linux VMs.
 
-- It begins by getting access to a Linux computer that will be used to execute the provisioning process. 
+- It begins by getting access to a Linux computer that will be used to execute the provisioning process.
 - The provisioning process will begin by installing the Azure cross platform client tools on the Linux computer.
--  Next, the necessary installation scripts and provisioning artifacts will be downloaded from Github using the git clone command. 
-	-  Some modifications will need to be made from this downloaded content. Both the partner as well as the customers and the partner will need to make these modifications. The partner defines the way the license file gets copied to the provisioned Linux VM. 
+-  Next, the necessary installation scripts and provisioning artifacts will be downloaded from Github using the git clone command.
+	-  Some modifications will need to be made from this downloaded content. Both the partner as well as the customers and the partner will need to make these modifications. The partner defines the way the license file gets copied to the provisioned Linux VM.
 -  But it is the end customer that runs the provisioning process. It will the customer that places the license key, and defines the attributes of the provisioned infrastructure, physically kick off the provisioning process.
 
 ![](images/snap022.png)
@@ -66,11 +64,11 @@ Once you have provisioned this virtual machine, you will need to gather its conn
 
 ![](images/snap002.png)
 
-#### SSH into the VM 
+#### SSH into the VM
 
 Skip this step if you already are logged into a Linux VM.
 
-From there you will need to remotely connect into that Linux virtual machine. MacOS has built them as SSH capabilities. Windows requires you to install the Putty application. 
+From there you will need to remotely connect into that Linux virtual machine. MacOS has built them as SSH capabilities. Windows requires you to install the Putty application.
 
 
 
@@ -85,15 +83,15 @@ sudo apt-get update
 sudo apt-get install nodejs-legacy
 sudo apt-get install npm
 sudo npm install -g azure-cli
-``` 
+```
 **RPM Based (CentOS)**
 ```
-su – 
-yum update [enter] 
-yum upgrade –y [enter] 
-yum install epel-release [enter] 
-yum install nodejs [enter] 
-yum install npm [enter] 
+su –
+yum update [enter]
+yum upgrade –y [enter]
+yum install epel-release [enter]
+yum install nodejs [enter]
+yum install npm [enter]
 npm install -g azure-cli [enter]
 ```
 
@@ -117,7 +115,7 @@ You should see a number of commands that are available to the Azure cross platfo
 Now that we have a Linux computer from which we can execute the provisioning process, let's take a deeper look at how all the pieces fit together.
 
 
-The following steps will get your started. 
+The following steps will get your started.
 
 
 1. Remote into the Ubuntu Image that we previously created
@@ -215,12 +213,12 @@ Key points when modifying:
 - Important information is here
 - Customers will input the license key they obtain from the partner
 - Customers will want to modify login credentials, and potentially other parameters:
-	- newStorageAccountName 
-	- adminUsername 
-	- adminPassword 
-	- licenseKey 
-	- dnsNameForPublicIP 
-	- ubuntuOSVersion 
+	- newStorageAccountName
+	- adminUsername
+	- adminPassword
+	- licenseKey
+	- dnsNameForPublicIP
+	- ubuntuOSVersion
 	- numberOfNodes
 
 ```json
@@ -270,7 +268,7 @@ echo $licenseKey >> /tmp/licensefile.txt
 ````
 
 
-## The customer provisioning process. Executing the deployment. 
+## The customer provisioning process. Executing the deployment.
 
 Once the modifications are made to azuredeploy.json and azuredeploy.parameters.json files have been made, the customer is ready to provision their VMs, networks, storage, and more.
 
@@ -293,14 +291,14 @@ $ azure group create “myRGroup" "West US" -f azuredeploy.json -d “myDeploy" 
 
 Notice the **azure group create** command. The assumption made here is the customer has made the necessary modifications to azuredeploy.json and azuredeploy.parameters.json. In addition, the partner has made changes to azuredeploy.json and install_license.sh.
 
- 
+
 The **azure group create...** command works as follows:
 
 - It takes the parameters file and the template file and generates a deployment.
 - azuredeploy.parameters.json
-	- Parameters file 
+	- Parameters file
 - azuredeploy.json
-	- Template file 
+	- Template file
 
 
 ![](images/paramandtemplate.png)
