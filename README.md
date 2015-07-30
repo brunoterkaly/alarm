@@ -11,6 +11,8 @@ The purpose of alarm is to help our partner’s customers be more efficient by g
 - Another issue is customer discovery
 - There is no mechanism that tells the partner which customers have provisioned software from the partner and which license keys are being used
 
+## Automatic install of License keys Template
+
 ![](images/buylicense.png)
 
 
