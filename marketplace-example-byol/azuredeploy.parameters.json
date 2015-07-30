@@ -1,20 +1,17 @@
 {
     "newStorageAccountName": {
-        "value": "jzarmtest"
+        "value": "marketplaceexample"
     },
     "adminUsername": {
-        "value": "jzarmtest"
+        "value": "azureuser"
     },
     "adminPassword": {
-        "value": "jzArmtest@1"
+        "value": "MyP@ssw0rd"
     },
     "licenseKey": {
         "value": "1"
     },
     "dnsNameForPublicIP": {
-        "value": "jzarmtest"
-    },
-    "ubuntuOSVersion": {
-        "value": "14.04.2-LTS"
+        "value": "marketplaceexample"
     }
 }

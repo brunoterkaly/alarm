@@ -38,7 +38,7 @@
         "imagePublisher": "docker",
         "imageOffer": "docker-subscription-for-azure",
         "sku": "dse-subem1y-000001",
-        "OSDiskName": "osdiskforlinuxsimple",
+        "OSDiskName": "osdisk",
         "nicName": "myVMNic",
         "addressPrefix": "10.0.0.0/16",
         "subnetName": "Subnet",
@@ -126,6 +126,11 @@
             "apiVersion": "2015-05-01-preview",
             "type": "Microsoft.Compute/virtualMachines",
             "name": "[variables('vmName')]",
+            "plan" : {
+               "name" : "byol",
+               "publisher" : "docker",
+               "product": "docker-subscription-for-azure"
+            },
             "location": "[variables('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Storage/storageAccounts/', parameters('newStorageAccountName'))]",
