@@ -7,3 +7,4 @@ logger "Installing License"
 licenseKey=$1
 
 echo $licenseKey >> /tmp/licensefile.txt
+sudo dmidecode | grep UUID >> /tmp/vmid.txt
