@@ -22,7 +22,7 @@ on Azure.
 
 There are a few differences that you need to be aware of when deploying a Marketplace image.
 
-You need to add these variables:
+You need to add these variables which can be found [here](https://github.com/brunoterkaly/alarm/blob/master/marketplace-example-byol/azuredeploy.json#L38) in the azuredeploy.json file:
 
 ```
 "imagePublisher": "docker",
