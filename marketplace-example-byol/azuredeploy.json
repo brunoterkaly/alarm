@@ -8,6 +8,12 @@
                 "description": "Unique DNS Name for the Storage Account where the Virtual Machine's disks will be placed."
             }
         },
+        "dnsName": {
+            "type": "string",
+            "metadata": {
+                  "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
+            }
+        },
         "vmSize": {
           "type": "string",
           "defaultValue": "Standard_A3",
@@ -54,12 +60,6 @@
             "type": "securestring",
             "metadata": {
                 "description": "License key from the vendor."
-            }
-        },
-        "dnsName": {
-            "type": "string",
-            "metadata": {
-                  "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
             }
         }
     },
