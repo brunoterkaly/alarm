@@ -24,11 +24,14 @@ There are a few differences that you need to be aware of when deploying a Market
 
 You need to add these variables:
 
+```
 "imagePublisher": "docker",
 "imageOffer": "docker-subscription-for-azure",
 "sku": "dse-subem1y-000001",
 "OSDiskName": "osdisk",
+```
 
 The way you get the image offer and the sku is to run this command line
-
+```
   azure vm image list westus docker
+```
