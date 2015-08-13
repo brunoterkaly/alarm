@@ -8,6 +8,36 @@
                 "description": "Unique DNS Name for the Storage Account where the Virtual Machine's disks will be placed."
             }
         },
+        "vmSize": {
+          "type": "string",
+          "defaultValue": "Standard_A3",
+          "allowedValues": [
+            "Standard_A0",
+            "Standard_A1",
+            "Standard_A2",
+            "Standard_A3",
+            "Standard_A4",
+            "Standard_D1",
+            "Standard_DS1",
+            "Standard_D2",
+            "Standard_DS2",
+            "Standard_D3",
+            "Standard_DS3",
+            "Standard_D4",
+            "Standard_DS4",
+            "Standard_D11",
+            "Standard_DS11",
+            "Standard_D12",
+            "Standard_DS12",
+            "Standard_D13",
+            "Standard_DS13",
+            "Standard_D14",
+            "Standard_DS14"
+          ],
+          "metadata": {
+            "description": "Instance size for the VMs"
+          }
+        },
         "adminUsername": {
             "type": "string",
             "metadata": {
@@ -47,8 +77,7 @@
         "publicIPAddressName": "myPublicIP",
         "publicIPAddressType": "Dynamic",
         "vmStorageAccountContainerName": "vhds",
-        "vmName": "MyUbuntuVM",
-        "vmSize": "Standard_D1",
+        "vmName": "DTRVM",
         "virtualNetworkName": "MyVNET",
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
@@ -138,7 +167,7 @@
             ],
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "[variables('vmSize')]"
+                    "vmSize": "[parameters('vmSize')]"
                 },
                 "osProfile": {
                     "computername": "[variables('vmName')]",

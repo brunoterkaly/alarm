@@ -2,6 +2,12 @@
     "newStorageAccountName": {
         "value": "marketplaceexample"
     },
+    "dnsName": {
+        "value": "marketplaceexample"
+    },
+    "vmSize": {
+     "value": "Standard_A3"
+   },
     "adminUsername": {
         "value": "azureuser"
     },
@@ -10,8 +16,5 @@
     },
     "licenseKey": {
         "value": "1"
-    },
-    "dnsName": {
-        "value": "marketplaceexample"
     }
-}
+  }
