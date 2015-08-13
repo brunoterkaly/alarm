@@ -11,7 +11,7 @@
     "licenseKey": {
         "value": "1"
     },
-    "dnsNameForPublicIP": {
+    "dnsName": {
         "value": "marketplaceexample"
     }
 }

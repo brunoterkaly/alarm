@@ -23,10 +23,10 @@
         "licenseKey": {
             "type": "securestring",
             "metadata": {
-                "description": "Password for the Virtual Machine."
+                "description": "License key from the vendor."
             }
         },
-        "dnsNameForPublicIP": {
+        "dnsName": {
             "type": "string",
             "metadata": {
                   "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
@@ -71,7 +71,7 @@
             "properties": {
                 "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
                 "dnsSettings": {
-                    "domainNameLabel": "[parameters('dnsNameForPublicIP')]"
+                    "domainNameLabel": "[parameters('dnsName')]"
                 }
             }
         },
@@ -128,8 +128,8 @@
             "name": "[variables('vmName')]",
             "plan" : {
                "name" : "[variables('sku')]",
-               "publisher" : "docker",
-               "product": "docker-subscription-for-azure"
+               "publisher" : "[variables('imagePublisher')]",
+               "product": "[variables('imageOffer')]"
             },
             "location": "[variables('location')]",
             "dependsOn": [
